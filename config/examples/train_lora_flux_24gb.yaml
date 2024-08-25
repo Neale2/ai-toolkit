@@ -2,7 +2,7 @@
 job: extension
 config:
   # this name will be the folder and filename name
-  name: "my_first_flux_lora_v1"
+  name: "Flux LoRA"
   process:
     - type: 'sd_trainer'
       # root folder to save training sessions/samples/weights
@@ -12,7 +12,7 @@ config:
       device: cuda:0
       # if a trigger word is specified, it will be added to captions of training data if it does not already exist
       # alternatively, in your captions you can add [trigger] and it will be replaced with the trigger word
-#      trigger_word: "p3r5on"
+      trigger_word: "Arturo Neale"
       network:
         type: "lora"
         linear: 16
@@ -31,7 +31,7 @@ config:
         # images will automatically be resized and bucketed into the resolution specified
         # on windows, escape back slashes with another backslash so
         # "C:\\path\\to\\images\\folder"
-        - folder_path: "/path/to/images/folder"
+        - folder_path: "/dataset"
           caption_ext: "txt"
           caption_dropout_rate: 0.05  # will drop out the caption 5% of time
           shuffle_tokens: false  # shuffle caption order, split by commas
@@ -66,7 +66,7 @@ config:
         name_or_path: "black-forest-labs/FLUX.1-dev"
         is_flux: true
         quantize: true  # run 8bit mixed precision
-#        low_vram: true  # uncomment this if the GPU is connected to your monitors. It will use less vram to quantize, but is slower.
+        low_vram: true  # uncomment this if the GPU is connected to your monitors. It will use less vram to quantize, but is slower.
       sample:
         sampler: "flowmatch" # must match train.noise_scheduler
         sample_every: 250 # sample every this many steps
@@ -85,6 +85,7 @@ config:
           - "photo of a man, white background, medium shot, modeling clothing, studio lighting, white backdrop"
           - "a man holding a sign that says, 'this is a sign'"
           - "a bulldog, in a post apocalyptic world, with a shotgun, in a leather jacket, in a desert, with a motorcycle"
+          - "[trigger] wearing a green shirt"
         neg: ""  # not used on flux
         seed: 42
         walk_seed: true
